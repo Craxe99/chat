@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  chat:
+    build: ./
+    command: ./wait-for-postgres.sh db ./chat
+    ports:
+    - 9000:9000
+    depends_on:
+      - db
+    environment:
+      - DB_PASSWORD=qwerty
+
+  db:
+    image: postgres:latest
+    volumes:
+    - ./.database/data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=qwerty
+    ports:
+      - 5436:5432
