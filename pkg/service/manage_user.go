@@ -3,7 +3,6 @@ package service
 import (
 	"github.com/Craxe99/chat/entities"
 	"github.com/Craxe99/chat/pkg/repository"
-	"github.com/google/uuid"
 	"time"
 )
 
@@ -24,8 +23,6 @@ func newManageUser(repos repository.ManageUser) *UserService {
 func (u *UserService) CreateUser(user entities.User) (string, error) {
 	// Сохранение времени создания в формате UTC
 	user.CreatedAt = time.Now().UTC()
-	// Создание UUID пользователя с префиксом U (User).
-	user.Id = "U" + uuid.NewString()
 
 	// Вызов соответствующей функции интерфейса репозитория и возврат полученных значений
 	return u.repos.CreateUser(user)

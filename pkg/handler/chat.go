@@ -23,13 +23,13 @@ func (h *Handler) addChat(c *gin.Context) {
 		return
 	}
 
-	for _, str := range Input.Users {
-		chat.Users = append(chat.Users, entities.User{Id: str})
+	for _, uId := range Input.Users {
+		chat.Users = append(chat.Users, entities.User{Id: uId})
 	}
 	chat.Name = Input.Name
 
 	// Вызов функции создания чата через интерфейс сервиса, отвечающий за управление чатами
-	id, err := h.services.ManageChat.CreateChat(chat)
+	cId, err := h.services.ManageChat.CreateChat(chat)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -37,7 +37,7 @@ func (h *Handler) addChat(c *gin.Context) {
 
 	// Ответ на запрос
 	c.JSON(http.StatusOK, gin.H{
-		"id": id,
+		"id": cId,
 	})
 }
 

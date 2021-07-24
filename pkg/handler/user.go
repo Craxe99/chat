@@ -37,9 +37,8 @@ func (h *Handler) getUsers(c *gin.Context) {
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
-	}
-	if users == nil {
-		newErrorResponse(c, http.StatusInternalServerError, "Users count is null")
+	} else if users == nil {
+		newErrorResponse(c, http.StatusBadRequest, "Users count is null")
 		return
 	}
 

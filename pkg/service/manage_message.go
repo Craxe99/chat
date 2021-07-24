@@ -3,7 +3,6 @@ package service
 import (
 	"github.com/Craxe99/chat/entities"
 	"github.com/Craxe99/chat/pkg/repository"
-	"github.com/google/uuid"
 	"time"
 )
 
@@ -24,9 +23,6 @@ func newManageMessage(repos repository.ManageMessage) *MessageService {
 func (m *MessageService) CreateMessage(message entities.Message) (string, error) {
 	// Сохранение времени создания в формате UTC
 	message.CreatedAt = time.Now().UTC()
-
-	// Создание UUID сообщения с префиксом M (Message).
-	message.Id = "M" + uuid.NewString()
 
 	// Вызов соответствующей функции интерфейса репозитория и возврат полученных значений
 	return m.repos.CreateMessage(message)

@@ -34,8 +34,7 @@ docker-compose up --build
 * Репозиторий осуществляет работу с базой данных, получая команды от сервиса.
 
 ### Список использованных библиотек
-* github.com/gin-gonic/gin - фреймворк GIN 
-* github.com/google/uuid - генератор UUID
+* github.com/gin-gonic/gin - фреймворк GIN
 * github.com/jmoiron/sqlx - библиотека для работы с БД
 * github.com/lib/pq - драйвер для БД
 * github.com/sirupsen/logrus - логгер

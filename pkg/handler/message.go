@@ -17,6 +17,13 @@ func (h *Handler) addMessage(c *gin.Context) {
 		return
 	}
 
+	// Проверка, есть ли пользователь в чате, через интерфейс сервиса, отвечающий за управление чатами
+	is, err := h.services.ManageChat.IsUserInChat(input.Author, input.Chat)
+	if is == false {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+
 	// Вызов функции создания сообщения через интерфейс сервиса, отвечающий за управление сообщениями
 	id, err := h.services.ManageMessage.CreateMessage(input)
 	if err != nil {

@@ -18,6 +18,7 @@ type ManageUser interface {
 type ManageChat interface {
 	CreateChat(chat entities.Chat) (string, error)
 	GetChats(userId string) ([]entities.Chat, error)
+	IsUserInChat(userId string, chatId string) (bool, error)
 }
 
 // Интерфейс управления сообщениями

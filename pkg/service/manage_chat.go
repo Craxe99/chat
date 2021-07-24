@@ -3,7 +3,6 @@ package service
 import (
 	"github.com/Craxe99/chat/entities"
 	"github.com/Craxe99/chat/pkg/repository"
-	"github.com/google/uuid"
 	"time"
 )
 
@@ -24,8 +23,6 @@ func newManageChat(repos repository.ManageChat) *ChatService {
 func (c *ChatService) CreateChat(chat entities.Chat) (string, error) {
 	// Сохранение времени создания в формате UTC
 	chat.CreatedAt = time.Now().UTC()
-	// Создание UUID чата с префиксом C (Chat).
-	chat.Id = "C" + uuid.NewString()
 
 	// Вызов соответствующей функции интерфейса репозитория и возврат полученных значений
 	return c.repos.CreateChat(chat)
@@ -48,4 +45,9 @@ func (c *ChatService) GetChats(userId string) ([]entities.Chat, error) {
 
 	// Возврат полученного списка
 	return chats, err
+}
+
+// Функция проверки, находится ли пользователь в чате
+func (c *ChatService) IsUserInChat(userId string, chatId string) (bool, error) {
+	return c.repos.IsUserInChat(userId, chatId)
 }
